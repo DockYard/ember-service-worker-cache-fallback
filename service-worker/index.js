@@ -1,4 +1,6 @@
-self.addFetchListener(function(event) {
+import { addFetchListener } from 'ember-service-worker/service-worker';
+
+addFetchListener(function(event) {
   return caches.open('esw-fallback-cache')
     .then(function(cache) {
       return fetch(event.request, { mode: 'no-cors' })
