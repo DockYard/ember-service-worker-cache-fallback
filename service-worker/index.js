@@ -1,4 +1,4 @@
-import { addFetchListener, PROJECT_REVISION } from 'ember-service-workers/service-worker';
+import { addFetchListener, PROJECT_REVISION } from 'ember-service-worker/service-worker';
 
 const CACHE_KEY_PREFIX = 'esw-fallback-cache-';
 const CACHE_NAME = `${CACHE_KEY_PREFIX}${PROJECT_REVISION}`;
