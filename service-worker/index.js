@@ -6,7 +6,7 @@ const CACHE_NAME = `${CACHE_KEY_PREFIX}${PROJECT_REVISION}`;
 addFetchListener(function(event) {
   return caches.open(CACHE_NAME)
     .then(function(cache) {
-      return fetch(event.request, { mode: 'no-cors' })
+      return fetch(event.request, { mode: 'no-cors', credentials: 'same-origin' })
         .then(function(response) {
           cache.put(event.request, response.clone());
           return response;
