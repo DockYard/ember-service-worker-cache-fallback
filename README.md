@@ -9,6 +9,32 @@ the network request fails_
 ember install ember-service-worker-cache-fallback
 ```
 
+## Configuration
+
+The configuration is done in the `ember-cli-build.js` file:
+
+```js
+var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+module.exports = function(defaults) {
+  var app = new EmberApp(defaults, {
+    'esw-cache-fallback': {
+      // RegExp patterns specifying which URLs to cache.
+      patterns: [
+        '/api/v1/(.+)',
+        'https://cdn.example.com/assets/fonts/(.+)',
+        'https://cdn.example.com/assets/images/((?!avatars/).+)'
+      ],
+
+      // changing this version number will bust the cache
+      version: '1'
+    }
+  });
+
+  return app.toTree();
+};
+```
+
 ## Authors
 
 * [Marten Schilstra](http://twitter.com/martndemus)
