@@ -35,7 +35,6 @@ self.addEventListener('fetch', (event) => {
   }
 });
 
-
 self.addEventListener('activate', (event) => {
   event.waitUntil(cleanupCaches(CACHE_KEY_PREFIX, CACHE_NAME));
 });
