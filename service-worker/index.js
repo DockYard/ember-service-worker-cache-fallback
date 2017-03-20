@@ -1,17 +1,11 @@
 import { PATTERNS, VERSION } from 'ember-service-worker-cache-fallback/service-worker/config';
 import cleanupCaches from 'ember-service-worker/service-worker/cleanup-caches';
+import { createUrlRegEx, urlMatchesAnyPattern } from 'ember-service-worker/service-worker/url-utils';
 
 const CACHE_KEY_PREFIX = 'esw-cache-fallback';
 const CACHE_NAME = `${CACHE_KEY_PREFIX}-${VERSION}`;
 
-const PATTERN_REGEX = PATTERNS.map((pattern) => {
-  let normalized = new URL(pattern, self.location).toString();
-  return new RegExp(`^${normalized}$`);
-});
-
-const MATCH = (key) => {
-  return !!PATTERN_REGEX.find((pattern) => pattern.test(key));
-};
+const PATTERN_REGEX = PATTERNS.map(createUrlRegEx);
 
 self.addEventListener('fetch', (event) => {
   let request = event.request;
@@ -19,7 +13,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  if (MATCH(request.url)) {
+  if (urlMatchesAnyPattern(request.url, PATTERN_REGEX)) {
     event.respondWith(
       caches.open(CACHE_NAME).then((cache) => {
         return fetch(request)
@@ -27,9 +21,7 @@ self.addEventListener('fetch', (event) => {
             cache.put(request, response.clone());
             return response;
           })
-          .catch((response) => {
-            return caches.match(event.request);
-          });
+          .catch(() => caches.match(event.request));
       })
     );
   }
