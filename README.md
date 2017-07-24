@@ -1,5 +1,7 @@
 # Ember Service Worker Cache Fallback
 
+**[ember-service-worker-cache-fallback is built and maintained by DockYard, contact us for expert Ember.js consulting](https://dockyard.com/ember-consulting)**.
+
 _An Ember Service Worker plugin that resorts to a cached fallback version when
 the network request fails_
 
