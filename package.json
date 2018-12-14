@@ -8,7 +8,7 @@
   },
   "repository": "https://github.com/DockYard/ember-service-worker-cache-fallback",
   "engines": {
-    "node": ">= 4.0.0"
+    "node": "6.* || 8.* || >= 10.*"
   },
   "author": "Marten Schilstra <mail@martenschilstra.nl>",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "ember-service-worker-plugin"
   ],
   "dependencies": {
-    "broccoli-merge-trees": "^1.2.1",
-    "broccoli-plugin": "^1.3.0"
+    "broccoli-merge-trees": "^3.0.2",
+    "broccoli-plugin": "^1.3.1"
   }
 }
