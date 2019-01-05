@@ -9,7 +9,11 @@ const PATTERN_REGEX = PATTERNS.map(createUrlRegEx);
 
 self.addEventListener('fetch', (event) => {
   let request = event.request;
-  if (request.method !== 'GET' || !/^https?/.test(request.url)) {
+
+  const isHttps = /^https?/.test(request.url);
+  const isLocalhost = /^http:\/\/localhost?/.test(request.url);
+  
+  if (request.method !== 'GET' || (!isHttps && !isLocalHost)) {
     return;
   }
 
