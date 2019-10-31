@@ -25,8 +25,14 @@ module.exports = function(defaults) {
       patterns: [
         '/api/v1/(.+)',
         'https://cdn.example.com/assets/fonts/(.+)',
-        'https://cdn.example.com/assets/images/((?!avatars/).+)'
+        'https://cdn.example.com/assets/images/(.+)'
       ],
+
+      // RegExp patterns to specifically disable cache for some urls.
+      ignore: [
+        '/api/v1/live-posts',
+        'https://cdn.example.com/assets/images/avatars(.+)'
+      ]
 
       // changing this version number will bust the cache
       version: '1'
